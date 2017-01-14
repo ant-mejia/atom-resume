@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Match, Miss, Link } from 'react-router'
+import UserStatus from './UserStatus';
 
 class Header extends React.Component {
 
@@ -17,9 +18,9 @@ class Header extends React.Component {
               </button>
               <Link className="navbar-brand" to="/">Logo</Link>
             </div>
-            <Link to="/login">
-              <button type="button" className="btn btn-default navbar-btn navbar-right">Sign in</button>
-            </Link>
+            <div className="navbar-right">
+              <UserStatus user={this.props.user} signOutUser={this.props.signOutUser}/>
+            </div>
           </div>
         </nav>
       </header>

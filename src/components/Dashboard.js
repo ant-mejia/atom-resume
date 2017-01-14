@@ -4,7 +4,9 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div />
+      <div>
+        <input type="text" placeholder="Enter Name"/>
+      </div>
     );
   }
 

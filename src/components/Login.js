@@ -1,32 +1,39 @@
-import React from 'react';
+import React, { PropTypes } from 'react'
+import { Match, Miss, Link,History,Redirect } from 'react-router'
+import Router from 'react-router/BrowserRouter'
 
 class Login extends React.Component {
 
   validateEmail = () => {
-    console.log('email');
+    return true;
   }
 
   validatePassword = () => {
-    console.log('password');
+    return true;
   }
 
-  submitForm = () => {
+  submitLogin = (e) => {
+    e.preventDefault();
     if (this.validateEmail() === true && this.validatePassword() === true) {
-      
+      this.props.signInUser({email: this.refs.logEmail.value, password: this.refs.logPass.value}, () => {
+        Router.transitionTo('/asda')
+      });
     } else {
-
     }
   }
 
   render() {
     return (
-      <div id="login-page">
-        <h1>Sign In</h1>
-        <div>
-          <form onSubmit={this.submitForm}>
-            <input type="email" onChange={this.validateEmail}/>
-            <input type="password" onChange={this.validatePassword}/>
-          </form>
+      <div>
+        <div id="login-page">
+          <h1>Sign In</h1>
+          <div>
+            <form onSubmit={(e) => this.submitLogin(e)}>
+              <input ref="logEmail" type="email" onChange={this.validateEmail}/>
+              <input ref="logPass" type="password" onChange={this.validatePassword}/>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     );
