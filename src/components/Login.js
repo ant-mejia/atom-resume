@@ -19,7 +19,7 @@ class Login extends React.Component {
     }
     return (
       <div>
-        <button>Log in</button>
+        <button onClick={() => this.props.signInUser({email: 'a@b.co', password: 'ant123'}, (d) => console.log(d))}>Log in</button>
       </div>
     )
   }

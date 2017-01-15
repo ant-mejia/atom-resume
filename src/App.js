@@ -49,6 +49,18 @@ class App extends React.Component {
     }
   }
 
+  displayNameExists(name) {
+    axios.get(`https://atom-resume.firebaseio.com/users/.json`).then((resp) => {
+      for (var key in resp.data) {
+        var obj = resp.data[key];
+        console.log(name === obj.displayName);
+        if (name === obj.displayName) {
+          return name === obj.displayName;
+        }
+      }
+    });
+  }
+
   isUserAuth = () => {
     if (Object.keys(this.state.user).length === 0) {
       return false;
@@ -58,6 +70,21 @@ class App extends React.Component {
 
   setUser = (user) => {
     this.setState({user});
+  }
+
+  signInUser = (cred, fn) => {
+    firebase.auth().signInWithEmailAndPassword(cred.email, cred.password)
+    .then((data) => {
+      this.setUser(data);
+      fn(data)
+    })
+    .catch(function(error) {
+      console.log(error.message);
+    });
+  }
+
+  signOutUser = (fn) => {
+    firebase.auth().signOut().then(fn());
   }
 
 
@@ -74,9 +101,10 @@ class App extends React.Component {
               </ul>
 
               <Match exactly pattern="/" component={Home}/>
-              <Match exactly pattern="/login" component={()=><Login user={this.state.user} isUserAuth={this.isUserAuth}/>}/>
+              <Match exactly pattern="/login" component={()=><Login user={this.state.user} signInUser={this.signInUser} isUserAuth={this.isUserAuth}/>}/>
               <MatchOnAuth user={this.state.user} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
-              <Miss component={NotFound}/>
+              <Miss render={({ location }) => (
+                <NotFound location={location}/>)}/>
             </div>
           )}
         </Router>

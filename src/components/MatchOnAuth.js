@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Match from 'react-router/Match'
 import Redirect from 'react-router/Redirect'
+import Dashboard from './Dashboard.js';
 
 class MatchOnAuth extends React.Component {
 
@@ -9,7 +10,7 @@ class MatchOnAuth extends React.Component {
     <div>
       <Match pattern="/profile" exactly render={() => (
         this.props.isUserAuth() ? (
-          <Redirect to="/dashboard"/>
+          <Dashboard user={this.props.user}/>
         ) : (
           <Redirect to="/login"/>
         )

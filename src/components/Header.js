@@ -23,12 +23,7 @@ class Header extends React.Component {
             <div className="navbar-right">
               {this.props.isUserAuth() ? (
                 <p>
-                  Welcome! {'Anthony'}
-                  <button onClick={() => {
-                    this.props.fakeAuth.signout(() => {
-                      this.props.router.transitionTo('/')
-                    })
-                  }}>Sign out</button>
+                  {this.props.user.displayName || this.props.user.email}
                 </p>
               ) : (
                 <Link to="/login">
