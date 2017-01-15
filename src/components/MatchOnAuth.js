@@ -6,12 +6,17 @@ class MatchOnAuth extends React.Component {
 
   render() {
     return (
-        <Match render={() => (
-          <p>Hello World!</p>
-        )}/>
-    );
+    <div>
+      <Match pattern="/profile" exactly render={() => (
+        this.props.isUserAuth() ? (
+          <Redirect to="/dashboard"/>
+        ) : (
+          <Redirect to="/login"/>
+        )
+      )}/>
+    </div>
+    )
   }
-
 }
 
 export default MatchOnAuth;

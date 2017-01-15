@@ -21,7 +21,7 @@ class Header extends React.Component {
               <Link className="navbar-brand" to="/">Logo</Link>
             </div>
             <div className="navbar-right">
-              {this.props.fakeAuth.isAuthenticated ? (
+              {this.props.isUserAuth() ? (
                 <p>
                   Welcome! {'Anthony'}
                   <button onClick={() => {
@@ -31,7 +31,9 @@ class Header extends React.Component {
                   }}>Sign out</button>
                 </p>
               ) : (
-                <p>You are not logged in.</p>
+                <Link to="/login">
+                  <button>Sign In</button>
+                </Link>
               )}
             </div>
           </div>

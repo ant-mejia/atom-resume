@@ -6,32 +6,20 @@ import Router from 'react-router/BrowserRouter'
 
 
 class Login extends React.Component {
-  state = {
-    redirectToReferrer: false
-  }
-
-  login = () => {
-    this.props.fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
+  constructor(props) {
+    super(props);
   }
 
   render() {
-    const { from } = this.props.location.state || '/'
-    const { redirectToReferrer } = this.state
-    console.log(from);
+
+    // const { from } =  '/'
+    // const { redirectToReferrer } = this.state
+    if (this.props.isUserAuth() === true) {
+      return <Redirect to={'/profile'}/>
+    }
     return (
       <div>
-        {redirectToReferrer && (
-          <Redirect to={from || '/'}/>
-        )}
-        {from && (
-          <p>
-            You must log in to view the page at
-            <code>{from.pathname}</code>
-          </p>
-        )}
-        <button onClick={this.login}>Log in</button>
+        <button>Log in</button>
       </div>
     )
   }
