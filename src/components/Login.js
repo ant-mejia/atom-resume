@@ -1,44 +1,40 @@
 import React, { PropTypes } from 'react'
-import { Match, Miss, Link,History,Redirect } from 'react-router'
+import Match from 'react-router/Match'
+import Link from 'react-router/Link'
+import Redirect from 'react-router/Redirect'
 import Router from 'react-router/BrowserRouter'
 
+
 class Login extends React.Component {
-
-  validateEmail = () => {
-    return true;
+  state = {
+    redirectToReferrer: false
   }
 
-  validatePassword = () => {
-    return true;
-  }
-
-  submitLogin = (e) => {
-    e.preventDefault();
-    if (this.validateEmail() === true && this.validatePassword() === true) {
-      this.props.signInUser({email: this.refs.logEmail.value, password: this.refs.logPass.value}, () => {
-        Router.transitionTo('/asda')
-      });
-    } else {
-    }
+  login = () => {
+    this.props.fakeAuth.authenticate(() => {
+      this.setState({ redirectToReferrer: true })
+    })
   }
 
   render() {
+    const { from } = this.props.location.state || '/'
+    const { redirectToReferrer } = this.state
+    console.log(from);
     return (
       <div>
-        <div id="login-page">
-          <h1>Sign In</h1>
-          <div>
-            <form onSubmit={(e) => this.submitLogin(e)}>
-              <input ref="logEmail" type="email" onChange={this.validateEmail}/>
-              <input ref="logPass" type="password" onChange={this.validatePassword}/>
-              <button type="submit">Submit</button>
-            </form>
-          </div>
-        </div>
+        {redirectToReferrer && (
+          <Redirect to={from || '/'}/>
+        )}
+        {from && (
+          <p>
+            You must log in to view the page at
+            <code>{from.pathname}</code>
+          </p>
+        )}
+        <button onClick={this.login}>Log in</button>
       </div>
-    );
+    )
   }
-
 }
 
 export default Login;

@@ -1,6 +1,8 @@
-import React from 'react';
-import { BrowserRouter, Match, Miss, Link } from 'react-router'
-import UserStatus from './UserStatus';
+import React, { PropTypes } from 'react'
+import Match from 'react-router/Match'
+import Link from 'react-router/Link'
+import Redirect from 'react-router/Redirect'
+import Router from 'react-router/BrowserRouter'
 
 class Header extends React.Component {
 
@@ -19,7 +21,18 @@ class Header extends React.Component {
               <Link className="navbar-brand" to="/">Logo</Link>
             </div>
             <div className="navbar-right">
-              <UserStatus user={this.props.user} signOutUser={this.props.signOutUser}/>
+              {this.props.fakeAuth.isAuthenticated ? (
+                <p>
+                  Welcome! {'Anthony'}
+                  <button onClick={() => {
+                    this.props.fakeAuth.signout(() => {
+                      this.props.router.transitionTo('/')
+                    })
+                  }}>Sign out</button>
+                </p>
+              ) : (
+                <p>You are not logged in.</p>
+              )}
             </div>
           </div>
         </nav>
