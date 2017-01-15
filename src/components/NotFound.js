@@ -8,7 +8,7 @@ class NotFound extends React.Component {
     console.log(this.props.location.pathname);
     return (
       <div>
-        Not Found
+        <code>{this.props.location.pathname}</code> Not Found.
         <Link to="/">
           <button>Home</button>
         </Link>

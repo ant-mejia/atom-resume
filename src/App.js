@@ -12,6 +12,7 @@ import Dash from './components/Dashboard'
 import Home from './components/Home'
 import MatchOnAuth from './components/MatchOnAuth'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Login from './components/Login'
 import NotFound from './components/NotFound'
 
@@ -105,6 +106,7 @@ class App extends React.Component {
               <MatchOnAuth user={this.state.user} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
               <Miss render={({ location }) => (
                 <NotFound location={location}/>)}/>
+              <Footer/>
             </div>
           )}
         </Router>
