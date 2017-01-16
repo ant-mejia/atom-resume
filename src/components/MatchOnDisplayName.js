@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Match from 'react-router/Match'
+import Miss from 'react-router/Miss'
+import NotFound from './NotFound';
 
 class MatchOnDisplayName extends React.Component {
   constructor(props) {
@@ -10,7 +12,11 @@ class MatchOnDisplayName extends React.Component {
     };
   }
 
-  getProfiles() {
+  componentDidMount() {
+    this.getProfiles();
+  }
+
+  getProfiles = () => {
     let profiles = [];
     let rname = false;
     axios.get(`https://atom-resume.firebaseio.com/users/.json`).then((resp) => {
@@ -24,19 +30,19 @@ class MatchOnDisplayName extends React.Component {
     return rname;
   }
 
-  profileExists(str) {
+  profileExists = (str) => {
     let prm = false;
     this.state.profiles.map((i) => {
       if (i === str) {
         prm = true;
       }
     });
+    // debugger
     return prm;
   }
 
   render() {
-    return (this.getProfiles() ? (<div>Yay!!</div>) : (<div>LOL</div>))
-
+    return (this.profileExists('antmejia') ? (<Match exactly pattern="/antmejia" component={this.props.component}/>) : (<div className="loading">Loading<Miss component={NotFound}/></div>))
   }
 }
 
