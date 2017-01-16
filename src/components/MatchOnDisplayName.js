@@ -30,8 +30,13 @@ class MatchOnDisplayName extends React.Component {
         let obj = resp.data[key];
         profiles.push(p);
       }
-      this.setState({profiles})
+      this.setState({profiles});
+      this.setState({matchDisaply: this.profileExists(this.props.displayName)})
     });
+  }
+
+  setUID = (uid) => {
+    this.setState({o:uid})
   }
 
   profileExists = (str) => {
@@ -39,7 +44,6 @@ class MatchOnDisplayName extends React.Component {
     this.state.profiles.map((i) => {
       if (i.displayName === str) {
         prm = true;
-        this.setState({o: i.uid})
       }
     });
     // debugger
@@ -48,7 +52,7 @@ class MatchOnDisplayName extends React.Component {
 
   render() {
     if (this.state.profiles) {
-      return (this.profileExists(this.props.displayName) ? (<Match exactly pattern={`/${this.props.displayName}`} component={() => <UserProfile uid={this.state.o}/>}/>) : (<Miss component={NotFound}/>))
+      return (this.state.matchDisaply ? (<Match exactly pattern={`/${this.props.displayName}`} component={() => <UserProfile uid={this.state.o}/>}/>) : (<Miss component={NotFound}/>))
     }
     else if (this.state.profiles === '') {
       return (
