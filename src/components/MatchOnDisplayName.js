@@ -2,13 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import Match from 'react-router/Match'
 import Miss from 'react-router/Miss'
-import NotFound from './NotFound';
+import NotFound from './NotFound'
+import UserProfile from './UserProfile';
 
 class MatchOnDisplayName extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      profiles: []
+      profiles: '',
+      d: {},
+      o: ''
     };
   }
 
@@ -18,23 +21,25 @@ class MatchOnDisplayName extends React.Component {
 
   getProfiles = () => {
     let profiles = [];
-    let rname = false;
     axios.get(`https://atom-resume.firebaseio.com/users/.json`).then((resp) => {
-      rname = true
-      for (var key in resp.data) {
-        var obj = resp.data[key];
-        profiles.push(obj.displayName);
+      this.setState({d:resp.data})
+      for (let key in resp.data) {
+        let p = {};
+        p.displayName = resp.data[key].displayName;
+        p.uid = key;
+        let obj = resp.data[key];
+        profiles.push(p);
       }
-      this.setState({ profiles})
+      this.setState({profiles})
     });
-    return rname;
   }
 
   profileExists = (str) => {
     let prm = false;
     this.state.profiles.map((i) => {
-      if (i === str) {
+      if (i.displayName === str) {
         prm = true;
+        this.setState({o: i.uid})
       }
     });
     // debugger
@@ -42,7 +47,14 @@ class MatchOnDisplayName extends React.Component {
   }
 
   render() {
-    return (this.profileExists('antmejia') ? (<Match exactly pattern="/antmejia" component={this.props.component}/>) : (<div className="loading">Loading<Miss component={NotFound}/></div>))
+    if (this.state.profiles) {
+      return (this.profileExists(this.props.displayName) ? (<Match exactly pattern={`/${this.props.displayName}`} component={() => <UserProfile uid={this.state.o}/>}/>) : (<Miss component={NotFound}/>))
+    }
+    else if (this.state.profiles === '') {
+      return (
+        <div>Loading</div>
+      )
+    }
   }
 }
 
