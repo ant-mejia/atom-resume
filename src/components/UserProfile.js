@@ -4,7 +4,7 @@ class UserProfile extends React.Component {
 
   render() {
     return (
-      <div />
+      <div>Theme Picker {this.props.displayName}</div>
     );
   }
 

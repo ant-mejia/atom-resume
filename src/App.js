@@ -1,5 +1,7 @@
 /*eslint-disable import/no-unresolved*/
-import React, { PropTypes } from 'react'
+import './App.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
+import React, {PropTypes, Component} from 'react'
 import * as firebase from 'firebase';
 import $ from 'jquery';
 import axios from 'axios';
@@ -11,18 +13,14 @@ import Router from 'react-router/BrowserRouter'
 import Dash from './components/Dashboard'
 import Home from './components/Home'
 import MatchOnAuth from './components/MatchOnAuth'
+import MatchOnDisplayName from './components/MatchOnDisplayName'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Login from './components/Login'
 import NotFound from './components/NotFound'
+import UserProfile from './components/UserProfile'
 
-firebase.initializeApp({
-  apiKey: "AIzaSyAns6xJMP_rxiioUbl_gOiByj3ysbjtqtY",
-  authDomain: "atom-resume.firebaseapp.com",
-  databaseURL: "https://atom-resume.firebaseio.com",
-  storageBucket: "atom-resume.appspot.com",
-  messagingSenderId: "415478292794"
-});
+firebase.initializeApp({apiKey: "AIzaSyAns6xJMP_rxiioUbl_gOiByj3ysbjtqtY", authDomain: "atom-resume.firebaseapp.com", databaseURL: "https://atom-resume.firebaseio.com", storageBucket: "atom-resume.appspot.com", messagingSenderId: "415478292794"});
 
 class App extends React.Component {
   constructor(props) {
@@ -44,22 +42,8 @@ class App extends React.Component {
       this.setUser(user);
     });
     if (firebase.auth().currentUser) {
-      this.setState({
-        user: firebase.auth().currentUser
-      });
+      this.setState({user: firebase.auth().currentUser});
     }
-  }
-
-  displayNameExists(name) {
-    axios.get(`https://atom-resume.firebaseio.com/users/.json`).then((resp) => {
-      for (var key in resp.data) {
-        var obj = resp.data[key];
-        console.log(name === obj.displayName);
-        if (name === obj.displayName) {
-          return name === obj.displayName;
-        }
-      }
-    });
   }
 
   isUserAuth = () => {
@@ -74,42 +58,50 @@ class App extends React.Component {
   }
 
   signInUser = (cred, fn) => {
-    firebase.auth().signInWithEmailAndPassword(cred.email, cred.password)
-    .then((data) => {
+    firebase.auth().signInWithEmailAndPassword(cred.email, cred.password).then((data) => {
       this.setUser(data);
-      fn(data)
-    })
-    .catch(function(error) {
+      fn ? fn(data) : '';
+    }).catch(function(error) {
       console.log(error.message);
     });
   }
 
   signOutUser = (fn) => {
-    firebase.auth().signOut().then(fn());
+    firebase.auth().signOut().then((data) => {
+      if (fn) {
+        console.log(fn);
+        fn(data);
+      }
+    });
   }
-
 
   render() {
     return (
-        <Router>
-          {({ router }) => (
-            <div>
-              <Header isUserAuth={this.isUserAuth} user={this.state.user} router={router}/>
-              <ul>
-                <li><Link to="/">Home Page</Link></li>
-                <li><Link to="/profile">Protected Page</Link></li>
-                <li><Link to="/login">Login Page</Link></li>
-              </ul>
+      <Router>
+        {({router}) => (
+          <div className="App">
+            <Header isUserAuth={this.isUserAuth} user={this.state.user} router={router}/>
+            <ul>
+              <li>
+                <Link to="/">Home Page</Link>
+              </li>
+              <li>
+                <Link to="/profile">Protected Page</Link>
+              </li>
+              <li>
+                <Link to="/login">Login Page</Link>
+              </li>
+            </ul>
 
-              <Match exactly pattern="/" component={Home}/>
-              <Match exactly pattern="/login" component={()=><Login user={this.state.user} signInUser={this.signInUser} isUserAuth={this.isUserAuth}/>}/>
-              <MatchOnAuth user={this.state.user} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
-              <Miss render={({ location }) => (
-                <NotFound location={location}/>)}/>
-              <Footer/>
-            </div>
-          )}
-        </Router>
+            <Match exactly pattern="/" component={Home}/>
+            <Match pattern="/login" component={() =><Login user = {this.state.user} signInUser = {this.signInUser} isUserAuth = {this.isUserAuth} />}/>
+            <MatchOnAuth user={this.state.user} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
+            <MatchOnDisplayName component={Dash}/>
+            <Miss component={NotFound}/>
+            <Footer/>
+          </div>
+        )}
+      </Router>
     );
   }
 }

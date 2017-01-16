@@ -4,7 +4,7 @@ class Footer extends React.Component {
 
   render() {
     return (
-      <div>Powered by Atom</div>
+      <footer>Powered by Atom</footer>
     );
   }
 
