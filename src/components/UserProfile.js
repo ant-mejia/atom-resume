@@ -95,8 +95,9 @@ class UserProfile extends React.Component {
               </div>
               <div className="skills-wrapper">
                 <h3 className="wrapper-title acap lt">Skills</h3>
+                ul
               </div>
-                </div>
+            </div>
             <div className="experience-wrapper col-sm-6">
               <h3 className="wrapper-title acap lt">Education</h3>
               <ul className="experience-list resume-list">

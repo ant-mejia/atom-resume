@@ -31,7 +31,12 @@ class MatchOnDisplayName extends React.Component {
         profiles.push(p);
       }
       this.setState({profiles});
-      this.setState({matchDisplay: this.profileExists(this.props.displayName)});
+      console.log(this.props.path);
+      if (this.props.path == '' || null || undefined) {
+        this.setState({matchDisplay: false})
+      } else {
+        this.setState({matchDisplay: this.profileExists(this.props.path)});
+      }
     });
   }
 
@@ -53,7 +58,7 @@ class MatchOnDisplayName extends React.Component {
 
   render() {
     if (this.state.profiles) {
-      return (this.state.matchDisplay ? (<Match exactly pattern={`/${this.props.displayName}`} component={() => <UserProfile uid={this.state.o}/>}/>) : (<Miss component={NotFound}/>))
+      return (this.state.matchDisplay ? (<Match exactly pattern={`/${this.props.path}`} component={() => <UserProfile uid={this.state.o}/>}/>) : (<Miss component={NotFound}/>))
     }
     else if (this.state.profiles === '') {
       return (

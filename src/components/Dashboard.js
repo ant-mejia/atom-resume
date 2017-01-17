@@ -27,6 +27,7 @@ class Dashboard extends React.Component {
   }
 
   setUserData = (obj) => {
+    console.log('blurred');
     axios.patch(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/.json`, obj);
   }
   render() {
