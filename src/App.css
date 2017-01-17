@@ -1,3 +1,8 @@
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -20,4 +25,93 @@ footer {
 
 input {
   display: block;
+}
+
+.ct {
+  text-align: center;
+}
+
+.lt {
+  text-align: left;
+}
+
+.acap {
+  text-transform: uppercase;
+}
+
+.cap {
+  text-transform: capitalize;
+}
+
+.vc {
+  display: inline-block;
+  vertical-align: middle;
+  float: none!important;
+}
+
+#resume-view {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.2em;
+}
+
+#resume-view .top-row {
+  display: table;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #d5d5d5;
+}
+
+#resume-view .name {
+  text-transform: uppercase;
+  font-size: 60px;
+  letter-spacing: 4px;
+}
+
+#resume-view .top-header,
+#resume-view .top-summary {
+  width: 50%;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+  float: left;
+  height: 100px;
+  display: block;
+}
+
+#resume-view .top .current-position h2 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #d5d5d5;
+  line-height: 0.1em;
+  margin: 20px auto;
+  font-size: 20px;
+}
+
+#resume-view .top .current-position h2 span {
+  background: #fff;
+  padding: 0 16px;
+}
+
+#resume-view .top .top-social ul {
+  margin-top: 20px;
+  list-style-type: none;
+  display: block;
+}
+
+#resume-view .top .top-social ul li {
+  display: inline-block;
+  float: left;
+  width: 33%;
+  text-align: center;
+}
+
+#resume-view .top .top-social ul li span {
+  margin-left: 20px;
+}
+
+.wrapper-title {
+  border-bottom: 1px solid #000;
 }

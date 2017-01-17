@@ -81,18 +81,6 @@ class App extends React.Component {
         {({router}) => (
           <div className="App">
             <Header isUserAuth={this.isUserAuth} user={this.state.user} router={router}/>
-            <ul>
-              <li>
-                <Link to="/">Home Page</Link>
-              </li>
-              <li>
-                <Link to="/profile">Protected Page</Link>
-              </li>
-              <li>
-                <Link to="/login">Login Page</Link>
-              </li>
-            </ul>
-
             <Match exactly pattern="/" component={Home}/>
             <Match pattern="/login" component={() =><Login user = {this.state.user} signInUser = {this.signInUser} isUserAuth = {this.isUserAuth} />}/>
             <MatchOnAuth user={this.state.user} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
