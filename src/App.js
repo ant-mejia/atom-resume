@@ -82,7 +82,7 @@ class App extends React.Component {
           <div className="App">
             <Header isUserAuth={this.isUserAuth} user={this.state.user} router={router}/>
             <Match exactly pattern="/" component={Home}/>
-            <Match pattern="/login" component={() =><Login user = {this.state.user} signInUser = {this.signInUser} isUserAuth = {this.isUserAuth} />}/>
+            <Match pattern="/login" component={() => <Login user={this.state.user} signInUser={this.signInUser} isUserAuth={this.isUserAuth} />}/>
             <MatchOnAuth user={this.state.user} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
             <MatchOnDisplayName displayName={location.pathname.replace('/','')} route={router} component={UserProfile}/>
             <Footer/>

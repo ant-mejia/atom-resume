@@ -15,9 +15,6 @@ body {
 
 footer {
   text-align: center;
-  position: absolute;
-  left: 0;
-  bottom: 0;
   height: 100px;
   width: 100%;
   background: #ddd;
@@ -68,6 +65,15 @@ input {
   letter-spacing: 4px;
 }
 
+#resume-view p {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+#resume-view .summary {
+  min-height: 200px;
+}
+
 #resume-view .top-header,
 #resume-view .top-summary {
   width: 50%;
@@ -82,7 +88,7 @@ input {
 }
 
 #resume-view .top .current-position h2 {
-  width: 100%;
+  width: 50%;
   text-align: center;
   border-bottom: 2px solid #d5d5d5;
   line-height: 0.1em;
@@ -96,7 +102,7 @@ input {
 }
 
 #resume-view .top .top-social ul {
-  margin-top: 20px;
+  margin: 30px auto;
   list-style-type: none;
   display: block;
 }
@@ -112,6 +118,47 @@ input {
   margin-left: 20px;
 }
 
+#resume-view .body {
+  margin-top: 100px;
+}
+
 .wrapper-title {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #aaa;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px 18px;
+  font-size: 22px;
+  letter-spacing: 4px;
+}
+
+.resume-list {
+  border-left: 1px solid #aaa;
+  padding-left: 14px;
+  list-style-type: none;
+}
+
+.resume-list li::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+  border: 4px solid #fff;
+  background-color: #aaa;
+  margin-left: -30px;
+  margin-bottom: -28px;
+  box-sizing: content-box;
+}
+
+.resume-list li {
+  padding-left: 10px;
+  margin-left: 0;
+  margin-bottom: 20px;
+}
+
+.resume-list li h4 {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 18px;
 }

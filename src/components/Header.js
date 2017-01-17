@@ -22,9 +22,11 @@ class Header extends React.Component {
             </div>
             <div className="navbar-right">
               {this.props.isUserAuth() ? (
-                <p>
-                  {this.props.user.displayName || this.props.user.email}
-                </p>
+                <Link to="/profile">
+                  <p className="navbar-text navbar-right">
+                    {this.props.user.displayName || this.props.user.email}
+                  </p>
+                </Link>
               ) : (
                 <Link to="/login">
                   <button>Sign In</button>
