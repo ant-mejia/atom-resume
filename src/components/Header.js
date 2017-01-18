@@ -23,9 +23,9 @@ class Header extends React.Component {
             <div className="navbar-right">
               {this.props.isUserAuth() ? (
                 <Link to="/profile">
-                  <p className="navbar-text">
+                  <h4 className="navbar-text">
                     {this.props.user.displayName || this.props.user.email}
-                  </p>
+                  </h4>
                 </Link>
               ) : (
                 <Link to="/login">

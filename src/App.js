@@ -78,7 +78,7 @@ class App extends Component {
             <Header isUserAuth={this.isUserAuth} user={this.state.user} router={router}/>
             <Match exactly pattern="/" component={Home}/>
             <Match pattern="/login" component={() => <Login user={this.state.user} signInUser={this.signInUser} isUserAuth={this.isUserAuth} />}/>
-            <MatchOnAuth user={this.state.user} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
+            <MatchOnAuth user={this.state.user} signOutUser={this.signOutUser} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
             <MatchOnDisplayName path={location} router={router}/>
             <Miss location={location} component={NotFound}/>
             <Footer/>

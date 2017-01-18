@@ -10,7 +10,7 @@ class MatchOnAuth extends React.Component {
     <div>
       <Match pattern="/profile" exactly render={() => (
         this.props.isUserAuth() ? (
-          <Dashboard user={this.props.user}/>
+          <Dashboard {...this.props}/>
         ) : (
           <Redirect to="/login"/>
         )
