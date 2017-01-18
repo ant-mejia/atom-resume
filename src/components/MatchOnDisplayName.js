@@ -16,56 +16,57 @@ class MatchOnDisplayName extends React.Component {
   }
 
   componentDidMount() {
-    this.getProfiles();
+      this.getProfiles();
   }
 
   getProfiles = () => {
     let profiles = [];
     axios.get(`https://atom-resume.firebaseio.com/users/.json`).then((resp) => {
-      this.setState({d:resp.data})
+      this.setState({d:resp.data});
       for (let key in resp.data) {
         let p = {};
         p.displayName = resp.data[key].displayName;
         p.uid = key;
-        let obj = resp.data[key];
         profiles.push(p);
       }
       this.setState({profiles});
-      console.log(this.props.path);
-      if (this.props.path == '' || null || undefined) {
-        this.setState({matchDisplay: false})
-      } else {
-        this.setState({matchDisplay: this.profileExists(this.props.path)});
-      }
     });
   }
 
-  setUID = (uid) => {
-    this.setState({o:uid})
-  }
-
-  profileExists = (str) => {
-    let prm = false;
-    this.state.profiles.map((i) => {
-      if (i.displayName === str) {
-        prm = true;
-        this.setUID(i.uid)
-      }
-    });
-    // debugger
-    return prm;
-  }
 
   render() {
     if (this.state.profiles) {
-      return (this.state.matchDisplay ? (<Match exactly pattern={`/${this.props.path}`} component={() => <UserProfile uid={this.state.o}/>}/>) : (<Miss component={NotFound}/>))
-    }
-    else if (this.state.profiles === '') {
       return (
-        <div>Loading</div>
-      )
+        <div>
+          {this.state.profiles.map((p) => {
+            return <Match exactly pattern={`/${p.displayName}`} key={p.uid} render={() => (<UserProfile uid={p.uid}/>)}/>
+          })}
+        </div>)
     }
+    return (
+      <div>Loading</div>
+    )
   }
 }
 
 export default MatchOnDisplayName;
+
+// setUID = (uid) => {
+//   this.setState({o:uid})
+// }
+//
+// profileExists = (str) => {
+//   let prm = false;
+//   this.state.profiles.map((i) => {
+//     if (i.displayName === str) {
+//       prm = true;
+//       this.setUID(i.uid)
+//     }
+//   });
+//   // debugger
+//   return prm;
+// }
+//
+// (this.state.profiles.map((p) => {
+//   return <Match exactly pattern={`/${p.displayName}`} render={() => (<p>Correct</p>)}/>
+// }))

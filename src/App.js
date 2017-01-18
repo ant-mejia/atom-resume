@@ -18,6 +18,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Login from './components/Login'
 import NotFound from './components/NotFound'
+
 import UserProfile from './components/UserProfile'
 
 firebase.initializeApp({apiKey: "AIzaSyAns6xJMP_rxiioUbl_gOiByj3ysbjtqtY", authDomain: "atom-resume.firebaseapp.com", databaseURL: "https://atom-resume.firebaseio.com", storageBucket: "atom-resume.appspot.com", messagingSenderId: "415478292794"});
@@ -78,13 +79,14 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        {({router}) => (
+        {({...router}) => (
           <div className="App">
             <Header isUserAuth={this.isUserAuth} user={this.state.user} router={router}/>
             <Match exactly pattern="/" component={Home}/>
             <Match pattern="/login" component={() => <Login user={this.state.user} signInUser={this.signInUser} isUserAuth={this.isUserAuth} />}/>
             <MatchOnAuth user={this.state.user} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
-            <MatchOnDisplayName path={location.pathname.replace('/','')} route={router} component={UserProfile}/>
+            <MatchOnDisplayName path={location} router={router}/>
+            <Miss location={location} component={NotFound}/>
             <Footer/>
           </div>
         )}

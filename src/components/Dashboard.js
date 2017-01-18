@@ -30,6 +30,11 @@ class Dashboard extends React.Component {
     console.log('blurred');
     axios.patch(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/.json`, obj);
   }
+
+  // sendObj = (obj, destination) => {
+  //   axios.post(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/${destination}/.json`);
+  // }
+
   render() {
     return (
       <div>

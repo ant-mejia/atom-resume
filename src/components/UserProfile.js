@@ -40,8 +40,8 @@ class UserProfile extends React.Component {
       <div id="resume-view">
         <div className="container wrapper">
           <div className="top row">
-            <div className="top-row">
-              <div className="top-header ct">
+            <div className="top-row container">
+              <div className="top-header ct col-sm-6">
                 <div className="name"><h1>{profile.firstname} {profile.lastname}</h1></div>
                 <div className="current-position"><h2><span>{profile.curposition}</span></h2></div>
               </div>
@@ -93,14 +93,10 @@ class UserProfile extends React.Component {
                   </li>
                 </ul>
               </div>
-              <div className="skills-wrapper">
-                <h3 className="wrapper-title acap lt">Skills</h3>
-                ul
-              </div>
             </div>
-            <div className="experience-wrapper col-sm-6">
+            <div className="education-wrapper col-sm-6">
               <h3 className="wrapper-title acap lt">Education</h3>
-              <ul className="experience-list resume-list">
+              <ul className="education-list resume-list">
                 <li>
                   <div>
                     <h4>My Degree | 01.17 - 01.17</h4>
@@ -116,6 +112,46 @@ class UserProfile extends React.Component {
                   </div>
                 </li>
               </ul>
+            </div>
+          </div>
+          <div className="tech-details row">
+            <div className="col-sm-6">
+              <div className="skills-wrapper">
+                <h3 className="wrapper-title acap lt">Skills</h3>
+                <ul className="skills-list">
+                  <li className="skill">HTML</li>
+                  <li className="skill">CSS</li>
+                  <li className="skill">Javascript</li>
+                  <li className="skill">Ruby</li>
+                  <li className="skill">React</li>
+                  <li className="skill">HTML</li>
+                  <li className="skill">CSS</li>
+                  <li className="skill">Javascript</li>
+                  <li className="skill">Ruby</li>
+                  <li className="skill">React</li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-sm-6">
+              <div className="project-wrapper">
+                <h3 className="wrapper-title acap lt">Projects</h3>
+                <ul className="project-list resume-list">
+                  <li>
+                    <div>
+                      <h4>My Degree | 01.17 - 01.17</h4>
+                      <h4>My University</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <h4>My Degree | 01.17 - 01.17</h4>
+                      <h4>My University</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
