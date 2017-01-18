@@ -39,12 +39,13 @@ class MatchOnDisplayName extends React.Component {
       return (
         <div>
           {this.state.profiles.map((p) => {
-            return <Match exactly pattern={`/${p.displayName}`} key={p.uid} render={() => (<UserProfile uid={p.uid}/>)}/>
+            return (<Match exactly pattern={`/${p.displayName}`} key={p.uid} render={() => (<UserProfile uid={p.uid}/>)}/>)
           })}
+          <Miss location={location} component={NotFound}/>
         </div>)
     }
     return (
-      <div>Loading</div>
+      <div/>
     )
   }
 }

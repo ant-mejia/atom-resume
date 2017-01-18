@@ -18,18 +18,18 @@ class Header extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <Link className="navbar-brand" to="/">Logo</Link>
+              <Link className="navbar-brand" to="/">Resumatic</Link>
             </div>
             <div className="navbar-right">
               {this.props.isUserAuth() ? (
                 <Link to="/profile">
-                  <p className="navbar-text navbar-right">
+                  <p className="navbar-text">
                     {this.props.user.displayName || this.props.user.email}
                   </p>
                 </Link>
               ) : (
                 <Link to="/login">
-                  <button>Sign In</button>
+                  <button type="button" className="btn navbar-btn">Sign in</button>
                 </Link>
               )}
             </div>

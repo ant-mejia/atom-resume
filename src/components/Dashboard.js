@@ -41,11 +41,13 @@ class Dashboard extends React.Component {
         <div className="container">
           <Link to={this.props.user.displayName}>View Resume</Link>
           <div className="row">
-            <h1>Profile</h1>
-            <input type="text" name="firstname" value={this.state.ud.firstname} ref="firstname" placeholder="First Name" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}/>
-            <input type="text" name="lastname" value={this.state.ud.lastname} ref="lastname" placeholder="First Name" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}/>
-            <input type="text" name="curposition" value={this.state.ud.curposition} ref="lastname" placeholder="Current Position" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}/>
-            <textarea name="summary" value={this.state.ud.summary} ref="summary" placeholder="Summary" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}></textarea>
+            <h1 className="section-title">Profile<span></span></h1>
+            <div className="container">
+              <input type="text" name="firstname" value={this.state.ud.firstname} ref="firstname" placeholder="First Name" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}/>
+              <input type="text" name="lastname" value={this.state.ud.lastname} ref="lastname" placeholder="First Name" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}/>
+              <input type="text" name="curposition" value={this.state.ud.curposition} ref="lastname" placeholder="Current Position" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}/>
+              <textarea name="summary" value={this.state.ud.summary} ref="summary" placeholder="Summary" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}></textarea>
+            </div>
           </div>
           <Link to="">
             <button id="signout-button">Sign Out</button>

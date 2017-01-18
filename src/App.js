@@ -1,14 +1,10 @@
 /*eslint-disable import/no-unresolved*/
 import './App.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
 import * as firebase from 'firebase';
-import $ from 'jquery';
-import axios from 'axios';
 import Match from 'react-router/Match'
 import Miss from 'react-router/Miss'
-import Link from 'react-router/Link'
-import Redirect from 'react-router/Redirect'
 import Router from 'react-router/BrowserRouter'
 import Dash from './components/Dashboard'
 import Home from './components/Home'
@@ -19,11 +15,9 @@ import Footer from './components/Footer'
 import Login from './components/Login'
 import NotFound from './components/NotFound'
 
-import UserProfile from './components/UserProfile'
-
 firebase.initializeApp({apiKey: "AIzaSyAns6xJMP_rxiioUbl_gOiByj3ysbjtqtY", authDomain: "atom-resume.firebaseapp.com", databaseURL: "https://atom-resume.firebaseio.com", storageBucket: "atom-resume.appspot.com", messagingSenderId: "415478292794"});
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,7 +55,7 @@ class App extends React.Component {
   signInUser = (cred, fn) => {
     firebase.auth().signInWithEmailAndPassword(cred.email, cred.password).then((data) => {
       this.setUser(data);
-      fn ? fn(data) : '';
+      fn ? fn(data) : fn = 0;
     }).catch(function(error) {
       console.log(error.message);
     });
