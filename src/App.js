@@ -79,8 +79,7 @@ class App extends Component {
             <Match exactly pattern="/" component={Home}/>
             <Match pattern="/login" component={() => <Login user={this.state.user} signInUser={this.signInUser} isUserAuth={this.isUserAuth} />}/>
             <MatchOnAuth user={this.state.user} signOutUser={this.signOutUser} isUserAuth={this.isUserAuth} pattern="/profile" component={Dash}/>
-            <MatchOnDisplayName path={location} router={router}/>
-            <Miss location={location} component={NotFound}/>
+            <Miss location={location} component={() => <MatchOnDisplayName path={location} router={router}/>}/>
             <Footer/>
           </div>
         )}

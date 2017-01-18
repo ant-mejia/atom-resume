@@ -10,6 +10,11 @@ class Login extends React.Component {
     super(props);
   }
 
+  submitForm = (e) => {
+    e.preventDefault();
+    this.props.signInUser({email: this.refs.email.value, password: this.refs.password.value})
+  }
+
   render() {
 
     // const { from } =  '/'
@@ -18,8 +23,14 @@ class Login extends React.Component {
       return <Redirect to={'/profile'}/>
     }
     return (
-      <div>
-        <button onClick={() => this.props.signInUser({email: 'a@b.co', password: 'ant123'})}>Log in</button>
+      <div id="login-page" className="container">
+        <div className="login-wrapper mc">
+          <form onSubmit={(e) => this.submitForm(e)}>
+            <input type="email" ref="email" placeholder="Email"/>
+            <input type="password" ref="password" placeholder="Password"/>
+            <button className="login mc btn" type="submit">Log in</button>
+          </form>
+        </div>
       </div>
     )
   }

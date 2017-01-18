@@ -153,14 +153,16 @@ class Dashboard extends React.Component {
   }
 
   sendObj = (obj, destination) => {
-    axios.post(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/${destination}/.json`, obj).then((value) => {console.log(value);});
+    axios.post(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/${destination}/.json`, obj).then((value) => {this.getUserData()});
   }
 
   render() {
     return (
-      <div>
+      <div id="dash-page">
         <div className="container">
-          <Link to={this.props.user.displayName}>View Resume</Link>
+          <div className="col-sm-6 pull-right">
+            <Link to={this.props.user.displayName}><button className="btn view-resume">View Resume</button></Link>
+          </div>
           <div className="dash-section row">
             <h1 className="section-title">Profile<span></span></h1>
             <div className="container col-sm-6">
@@ -191,7 +193,7 @@ class Dashboard extends React.Component {
             <div className="container">
             </div>
           </div>
-          <button id="signout-button" onClick={this.props.signOutUser}>Sign Out</button>
+          <button id="signout-button" className="btn" onClick={this.props.signOutUser}>Sign Out</button>
         </div>
       </div>
     );

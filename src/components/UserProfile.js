@@ -34,6 +34,40 @@ class UserProfile extends React.Component {
     }
   }
 
+  showExperience = () => {
+    if (this.state.profile.experience) {
+    return ( Object.keys(this.state.profile.experience).map((item) => {
+        let o = this.state.profile.experience[item];
+        return (
+          <li key={item}>
+            <div>
+              <h4>{o.position} | {o.sdate} - {o.edate}</h4>
+              <h4>{o.company}</h4>
+              <p>{o.summary}</p>
+            </div>
+          </li>
+        )
+      }))
+    }
+  }
+
+  showEducation = () => {
+    if (this.state.profile.education) {
+    return ( Object.keys(this.state.profile.education).map((item) => {
+        let o = this.state.profile.education[item];
+        return (
+          <li key={item}>
+            <div>
+              <h4>{o.degree} | {o.syear} - {o.eyear}</h4>
+              <h4>{o.university}</h4>
+              <p>{o.summary}</p>
+            </div>
+          </li>
+        )
+      }))
+    }
+  }
+
   render() {
     let profile = this.state.profile;
     return (
@@ -63,54 +97,14 @@ class UserProfile extends React.Component {
               <div className="experience-wrapper">
                 <h3 className="wrapper-title acap lt">Experience</h3>
                 <ul className="experience-list resume-list">
-                  <li>
-                    <div>
-                      <h4>My Position | 01.17 - 01.17</h4>
-                      <h4>My Company</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h4>My Position | 01.17 - 01.17</h4>
-                      <h4>My Company</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h4>My Position | 01.17 - 01.17</h4>
-                      <h4>My Company</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h4>My Position | 01.17 - 01.17</h4>
-                      <h4>My Company</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                  </li>
+                  {this.showExperience()}
                 </ul>
               </div>
             </div>
             <div className="education-wrapper col-sm-6">
               <h3 className="wrapper-title acap lt">Education</h3>
               <ul className="education-list resume-list">
-                <li>
-                  <div>
-                    <h4>My Degree | 01.17 - 01.17</h4>
-                    <h4>My University</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <h4>My Degree | 01.17 - 01.17</h4>
-                    <h4>My University</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  </div>
-                </li>
+                {this.showEducation()}
               </ul>
             </div>
           </div>
