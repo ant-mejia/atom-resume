@@ -228,7 +228,7 @@ class Dashboard extends React.Component {
                   </form>
                 </div>
                 <div>
-                  <ul>
+                  <ul className="dash-skills mc">
                     {this.renderSkills()}
                   </ul>
                 </div>
