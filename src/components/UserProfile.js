@@ -68,6 +68,16 @@ class UserProfile extends React.Component {
     }
   }
 
+  showSkills() {
+    if (this.state.profile.skills) {
+      return (Object.keys(this.state.profile.skills).map((i) => {
+        return (
+          <li key={i} className="skill">{this.state.profile.skills[i].skill}</li>
+        )
+      }))
+    }
+  }
+
   render() {
     let profile = this.state.profile;
     return (
@@ -113,16 +123,7 @@ class UserProfile extends React.Component {
               <div className="skills-wrapper">
                 <h3 className="wrapper-title acap lt">Skills</h3>
                 <ul className="skills-list">
-                  <li className="skill">HTML</li>
-                  <li className="skill">CSS</li>
-                  <li className="skill">Javascript</li>
-                  <li className="skill">Ruby</li>
-                  <li className="skill">React</li>
-                  <li className="skill">HTML</li>
-                  <li className="skill">CSS</li>
-                  <li className="skill">Javascript</li>
-                  <li className="skill">Ruby</li>
-                  <li className="skill">React</li>
+                  {this.showSkills()}
                 </ul>
               </div>
             </div>

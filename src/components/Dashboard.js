@@ -53,7 +53,6 @@ class Dashboard extends React.Component {
   }
 
   setUserData = (obj) => {
-    console.log('blurred');
     axios.patch(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/.json`, obj);
   }
 
@@ -152,8 +151,34 @@ class Dashboard extends React.Component {
     })
   }
 
+  newSkill = (e) => {
+    e.preventDefault();
+    let v = this.refs.skillInput.value
+    if (v.length > 0) {
+      let o = {}
+      o.skill = v
+      this.sendObj(o, 'skills');
+      this.refs.skillInput.value = ''
+    }
+ }
+
+ renderSkills() {
+   if (this.state.ud.skills) {
+     return (Object.keys(this.state.ud.skills).map((item) => {
+       let i = this.state.ud.skills[item]
+       return (
+         <li key={item} onClick={(e) => this.deleteSkill(e)} data-id={item}>{i.skill}</li>
+       )
+     }))
+   }
+ }
+
+ deleteSkill = (e) => {
+   axios.delete(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/skills/${$(e.target).attr('data-id')}/.json`).then(() => this.getUserData());
+ }
+
   sendObj = (obj, destination) => {
-    axios.post(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/${destination}/.json`, obj).then((value) => {this.getUserData()});
+    axios.post(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/${destination}/.json`, obj).then(() => this.getUserData());
   }
 
   render() {
@@ -176,7 +201,7 @@ class Dashboard extends React.Component {
             <h1 className="section-title">Experience<span></span></h1>
             <div className="container col-sm-6">
               {this.renderX()}
-              <button className="add-button mc col-sm-8" onClick={this.toggleX}>Add</button>
+              <button className="btn add-button mc col-sm-8" onClick={this.toggleX}>Add</button>
               {this.renderXEdit()}
             </div>
           </div>
@@ -184,16 +209,33 @@ class Dashboard extends React.Component {
             <h1 className="section-title">Education<span></span></h1>
             <div className="container col-sm-6">
               {this.renderE()}
-              <button className="add-button mc col-sm-8" onClick={this.toggleE}>Add</button>
+              <button className="btn add-button mc col-sm-8" onClick={this.toggleE}>Add</button>
               {this.renderEEdit()}
             </div>
           </div>
           <div className="dash-section row">
             <h1 className="section-title">Skills<span></span></h1>
             <div className="container">
+              <div className="row">
+                <div className="skills-input mc">
+                  <form onSubmit={(e) => this.newSkill(e)}>
+                    <div className="input-group input-group-add">
+                      <input type="text" className="form-control" ref="skillInput" placeholder="Add Skill"/>
+                      <span className="input-group-btn">
+                        <button className="btn add-button" type="submit">Add</button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+                <div>
+                  <ul>
+                    {this.renderSkills()}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
-          <button id="signout-button" className="btn" onClick={this.props.signOutUser}>Sign Out</button>
+          <button id="signout-button" className="btn mc" onClick={this.props.signOutUser}>Sign Out</button>
         </div>
       </div>
     );
