@@ -3,6 +3,7 @@ import './App.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import React, {Component} from 'react'
 import * as firebase from 'firebase';
+import axios from 'axios';
 import Match from 'react-router/Match'
 import Miss from 'react-router/Miss'
 import Router from 'react-router/BrowserRouter'
@@ -59,6 +60,21 @@ class App extends Component {
     }).catch(function(error) {
       console.log(error.message);
     });
+  }
+
+  updateUserName = (un) => {
+    if (this.isUserAuth()) {
+      this.state.user.updateProfile({
+        displayName: un
+      }).then(() => {
+        let o = {
+          displayName: un
+        }
+        axios.patch(`https://atom-resume.firebaseio.com/users/${this.state.user.uid}/.json`, o).then((value) => {this.getUser()}).catch((err) => {console.log(err)})
+      }, function(error) {
+        console.error(error)
+    });
+    }
   }
 
   signOutUser = (fn) => {
