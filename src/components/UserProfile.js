@@ -127,27 +127,6 @@ class UserProfile extends React.Component {
                 </ul>
               </div>
             </div>
-            <div className="col-sm-6">
-              <div className="project-wrapper">
-                <h3 className="wrapper-title acap lt">Projects</h3>
-                <ul className="project-list resume-list">
-                  <li>
-                    <div>
-                      <h4>My Degree | 01.17 - 01.17</h4>
-                      <h4>My University</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h4>My Degree | 01.17 - 01.17</h4>
-                      <h4>My University</h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </div>

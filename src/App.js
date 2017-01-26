@@ -86,6 +86,7 @@ class App extends Component {
     });
   }
 //component={({ params }) => <UserProfile />}/>
+
   render() {
     return (
       <Router>
