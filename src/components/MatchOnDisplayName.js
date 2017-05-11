@@ -16,37 +16,39 @@ class MatchOnDisplayName extends React.Component {
   }
 
   componentDidMount() {
-      this.getProfiles();
+    this.getProfiles();
   }
 
   getProfiles = () => {
     let profiles = [];
     axios.get(`https://atom-resume.firebaseio.com/users/.json`).then((resp) => {
-      this.setState({d:resp.data});
-      for (let key in resp.data) {
-        let p = {};
-        p.displayName = resp.data[key].displayName;
-        p.uid = key;
-        profiles.push(p);
+      if (this.state.d) {
+        this.setState({d: resp.data});
+        for (let key in resp.data) {
+          let p = {};
+          p.displayName = resp.data[key].displayName;
+          p.uid = key;
+          profiles.push(p);
+        }
+        this.setState({profiles});
       }
-      this.setState({profiles});
     });
   }
-
 
   render() {
     if (this.state.profiles) {
       return (
         <div>
           {this.state.profiles.map((p) => {
-            return (<Match exactly pattern={`/${p.displayName}`} key={p.uid} render={() => (<UserProfile uid={p.uid}/>)}/>)
+            return (
+              <Match exactly pattern={`/${p.displayName}`} key={p.uid} render={() => (<UserProfile uid={p.uid}/>)}/>
+            )
           })}
-          <Miss location={location} component={NotFound}/>
-        </div>)
+          <NotFound location={this.props.path}/>
+        </div>
+      )
     }
-    return (
-      <div/>
-    )
+    return (<NotFound location={this.props.path}/>)
   }
 }
 

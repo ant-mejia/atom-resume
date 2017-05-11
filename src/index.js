@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/uikit/dist/css/uikit.min.css';
+import '../node_modules/uikit/dist/js/uikit.min.js';
 import './index.css';
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+  <App/>, document.getElementById('root'));

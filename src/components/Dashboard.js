@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
-import { BrowserRouter, Link } from 'react-router';
+import {Link} from 'react-router';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -17,11 +17,12 @@ class Dashboard extends React.Component {
   }
 
   handleChange = (event) => {
-    let d = {...this.state.ud}
+    let d = {
+      ...this.state.ud
+    }
     d[event.target.name] = event.target.value
-    this.setState({ ud: d });
+    this.setState({ud: d});
   }
-
 
   getUserData = () => {
     axios.get(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/.json`).then((data) => {
@@ -39,7 +40,9 @@ class Dashboard extends React.Component {
       let r = this.state.ud;
       r['experience'] = data
       this.setState({ud: r});
-    }).catch((err) => {console.error(err)});
+    }).catch((err) => {
+      console.error(err)
+    });
   }
 
   getEducation = () => {
@@ -49,7 +52,9 @@ class Dashboard extends React.Component {
       let r = this.state.ud;
       r['education'] = data
       this.setState({ud: r});
-    }).catch((err) => {console.error(err)});
+    }).catch((err) => {
+      console.error(err)
+    });
   }
 
   setUserData = (obj) => {
@@ -59,17 +64,19 @@ class Dashboard extends React.Component {
   renderX = () => {
     if (this.state.ud.experience) {
       let x = this.state.ud.experience
-      return (
-      Object.keys(x).map((item) => {
+      return (Object.keys(x).map((item) => {
         let i = x[item];
-        return (<div key={item}>
-          <h3>{i.position}</h3>
-          <h4>{i.company} | {i.sdate} - {i.edate}</h4>
-          <p>{i.summary}</p>
-        </div>)
+        return (
+          <div key={item}>
+            <h3>{i.position}</h3>
+            <h4>{i.company}
+              | {i.sdate}
+              - {i.edate}</h4>
+            <p>{i.summary}</p>
+          </div>
+        )
       }))
-    }
-    else {
+    } else {
       return <div></div>
     }
   }
@@ -92,20 +99,22 @@ class Dashboard extends React.Component {
   renderE = () => {
     if (this.state.ud.education) {
       let x = this.state.ud.education
-      return (
-        Object.keys(x).map((item) => {
-          let i = x[item];
-          return (<div key={item}>
+      return (Object.keys(x).map((item) => {
+        let i = x[item];
+        return (
+          <div key={item}>
             <h3>{i.degree}</h3>
-            <h4>{i.university} | {i.syear} - {i.eyear}</h4>
+            <h4>{i.university}
+              | {i.syear}
+              - {i.eyear}</h4>
             <p>{i.summary}</p>
-          </div>)
-        }))
-      }
-      else {
-        return <div></div>
-      }
+          </div>
+        )
+      }))
+    } else {
+      return <div></div>
     }
+  }
 
   renderEEdit = () => {
     if (this.state.ee) {
@@ -160,22 +169,22 @@ class Dashboard extends React.Component {
       this.sendObj(o, 'skills');
       this.refs.skillInput.value = ''
     }
- }
+  }
 
- renderSkills() {
-   if (this.state.ud.skills) {
-     return (Object.keys(this.state.ud.skills).map((item) => {
-       let i = this.state.ud.skills[item]
-       return (
-         <li key={item} onClick={(e) => this.deleteSkill(e)} data-id={item}>{i.skill}</li>
-       )
-     }))
-   }
- }
+  renderSkills() {
+    if (this.state.ud.skills) {
+      return (Object.keys(this.state.ud.skills).map((item) => {
+        let i = this.state.ud.skills[item]
+        return (
+          <li key={item} onClick={(e) => this.deleteSkill(e)} data-id={item}>{i.skill}</li>
+        )
+      }))
+    }
+  }
 
- deleteSkill = (e) => {
-   axios.delete(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/skills/${$(e.target).attr('data-id')}/.json`).then(() => this.getUserData());
- }
+  deleteSkill = (e) => {
+    axios.delete(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/skills/${$(e.target).attr('data-id')}/.json`).then(() => this.getUserData());
+  }
 
   sendObj = (obj, destination) => {
     axios.post(`https://atom-resume.firebaseio.com/users/${this.props.user.uid}/${destination}/.json`, obj).then(() => this.getUserData());
@@ -186,10 +195,13 @@ class Dashboard extends React.Component {
       <div id="dash-page">
         <div className="container">
           <div className="col-sm-6 pull-right">
-            <Link to={this.props.user.displayName}><button className="btn view-resume">View Resume</button></Link>
+            <Link to={this.props.user.displayName}>
+              <button className="btn view-resume">View Resume</button>
+            </Link>
           </div>
           <div className="dash-section row">
-            <h1 className="section-title">Profile<span></span></h1>
+            <h1 className="section-title">Profile<span></span>
+            </h1>
             <div className="container col-sm-6">
               <input type="text" name="firstname" value={this.state.ud.firstname} ref="firstname" placeholder="First Name" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}/>
               <input type="text" name="lastname" value={this.state.ud.lastname} ref="lastname" placeholder="First Name" onChange={this.handleChange} onBlur={() => this.setUserData(this.state.ud)}/>
@@ -198,7 +210,8 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div className="dash-section row">
-            <h1 className="section-title">Experience<span></span></h1>
+            <h1 className="section-title">Experience<span></span>
+            </h1>
             <div className="container col-sm-6">
               {this.renderX()}
               <button className="btn add-button mc col-sm-8" onClick={this.toggleX}>Add</button>
@@ -206,7 +219,8 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div className="dash-section row">
-            <h1 className="section-title">Education<span></span></h1>
+            <h1 className="section-title">Education<span></span>
+            </h1>
             <div className="container col-sm-6">
               {this.renderE()}
               <button className="btn add-button mc col-sm-8" onClick={this.toggleE}>Add</button>
@@ -214,7 +228,8 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div className="dash-section row">
-            <h1 className="section-title">Skills<span></span></h1>
+            <h1 className="section-title">Skills<span></span>
+            </h1>
             <div className="container">
               <div className="row">
                 <div className="skills-input mc">

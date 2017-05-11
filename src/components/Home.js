@@ -1,49 +1,47 @@
 import React from 'react';
+import SideNav from './SideNav';
+import Jumbotron from './Jumbotron';
+import Panel from './Panel';
 
 class Home extends React.Component {
 
   render() {
     return (
       <div id="home-page">
-        {/* <img src="assets/resumatic.jpg"/> */}
-        <div className="jumbotron">
-          <h1>HomePage</h1>
-          <h2>This is a Home Page</h2>
-        </div>
+        <SideNav/>
+        <Jumbotron/>
         <div className="main-wrapper mh100 container">
-          <div className="side-nav">
-            <nav id="vertical-nav" >
-              <ul>
-                <li>
-                  <a href="#section1" data-number="1">
-                    <span className="cd-dot"></span>
-                    <span className="cd-label">Item 1</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#section2" data-number="2">
-                    <span className="cd-dot"></span>
-                    <span className="cd-label">Item 2</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#section3" data-number="3">
-                    <span className="cd-dot"></span>
-                    <span className="cd-label">Item 3</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#section4" data-number="4">
-                    <span className="cd-dot"></span>
-                    <span className="cd-label">Item 4</span>
-                  </a>
-                </li>
-                {/* <!-- other navigation items here--> */}
-              </ul>
-            </nav>
+          <div className="main-section row" id="intro1" data-uk-height-viewport>
+            <h1 className="section-title f50 uk-text-center">Reinvent Professional</h1>
+            <div className="uk-margin-xlarge-top uk-grid-match uk-child-width-1-3@m uk-text-center uk-grid" data-uk-grid>
+              <Panel text="Panel Text" icon="target"/>
+              <Panel text="Panel Text" icon="globe"/>
+              <Panel text="Panel Text" icon="globe"/>
+            </div>
           </div>
-          <div className="main-section row" id="intro">
-            <h1 className="section-title f50 ct">Reinvent Professional<span className="mc"></span></h1>
+          <div className="main-section row" id="intro2" data-uk-height-viewport>
+            <h1 className="section-title f50 uk-text-center">Reinvent Professional</h1>
+            <div className="uk-margin-xlarge-top uk-grid-match uk-child-width-1-3@m uk-text-center uk-grid" data-uk-grid>
+              <Panel text="Panel Text" icon="globe"/>
+              <Panel text="Panel Text" icon="globe"/>
+              <Panel text="Panel Text" icon="globe"/>
+            </div>
+          </div>
+          <div className="main-section row" id="intro3" data-uk-height-viewport>
+            <h1 className="section-title f50 uk-text-center">Reinvent Professional</h1>
+            <div className="uk-margin-xlarge-top uk-grid-match uk-child-width-1-3@m uk-text-center uk-grid" data-uk-grid>
+              <Panel text="Panel Text" icon="globe"/>
+              <Panel text="Panel Text" icon="globe"/>
+              <Panel text="Panel Text" icon="globe"/>
+            </div>
+          </div>
+          <div className="main-section row" id="intro4" data-uk-height-viewport>
+            <h1 className="section-title f50 uk-text-center">Reinvent Professional</h1>
+            <div className="uk-margin-xlarge-top uk-grid-match uk-child-width-1-3@m uk-text-center uk-grid" data-uk-grid>
+              <Panel text="Panel Text" icon="globe"/>
+              <Panel text="Panel Text" icon="globe"/>
+              <Panel text="Panel Text" icon="globe"/>
+            </div>
           </div>
         </div>
       </div>

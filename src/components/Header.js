@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, {PropTypes} from 'react'
 import Match from 'react-router/Match'
 import Link from 'react-router/Link'
 import Redirect from 'react-router/Redirect'
@@ -9,29 +9,27 @@ class Header extends React.Component {
   render() {
     return (
       <header>
-        <nav className="navbar navbar-default">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
+        <nav className="uk-navbar-container uk-navbar-transparent" data-uk-navbar>
+          <div className="uk-navbar-left">
+            <div className="uk-navbar-item uk-logo">
               <Link className="navbar-brand" to="/">Resumatic</Link>
             </div>
-            <div className="navbar-right">
-              {this.props.isUserAuth() ? (
-                <Link to="/profile">
-                  <h4 className="navbar-text">
-                    {this.props.user.displayName || this.props.user.email}
-                  </h4>
-                </Link>
-              ) : (
-                <Link to="/login">
-                  <button type="button" className="btn navbar-btn">Sign in</button>
-                </Link>
-              )}
+          </div>
+          <div className="uk-navbar-right">
+            <div className="uk-navbar-item">
+              {this.props.isUserAuth()
+                ? (
+                  <Link to="/profile">
+                    <h4 className="navbar-text">
+                      {this.props.user.displayName || this.props.user.email}
+                    </h4>
+                  </Link>
+                )
+                : (
+                  <Link to="/login">
+                    <button type="button" className="btn navbar-btn">Sign in</button>
+                  </Link>
+                )}
             </div>
           </div>
         </nav>
